@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:44 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:18:46 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,26 @@ typedef struct s_allvar
 {
     int     x;
     int     y;
+    char    *choosed_map;
     void    *mlx;
     void    *mlx_win;
-    void    *mlx_image;
+    void    *mlx_image_wall;
+    void    *mlx_image_ground;
+    void    *mlx_image_hero;
+    void    *mlx_image_door;
+    void    *mlx_image_enemy;
     char    **tab;
     int     i;
+    int     j;
+    int     z;
+    size_t  len;
 }       t_allvar;
+
+char	**ft_split(char const *s, char c);
+void    check_walls(t_allvar *allvar);
+char	*ft_strjoinn(char const *s1, char const *s2);
+char	*ft_strdup(const char *s1);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void checkmap(t_allvar *allvar);
 
 #endif

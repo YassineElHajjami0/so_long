@@ -2,6 +2,10 @@ NAME = so_long
 SRC = so_long.c \
 	get_next_line.c \
 	get_next_line_utils.c \
+	split.c \
+	check_walls.c \
+	fn.c \
+	check_chars.c \
 
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
