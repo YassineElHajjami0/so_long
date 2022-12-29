@@ -1,0 +1,15 @@
+2  =>  a b c d
+5  =>   b e mlx hook
+6 => b 
+mlx_put_image_to_window
+
+
+cyberpunk street samurai portrait cyberware sham shui po streets --v 4
+cyberpunk Hulk portrait neural interface --v 4 --q 2 --ar 3:2 --quality 2
+Super soldier 8k --v 4 --ar 2:3
+christophe bourdeau portrait cinematic soldier with futuristic weapons in a dark universe environment -
+I look at her with my heart that misses her every moment and every day while she is busy studying and I hope to see her soon 8k photo -
+christophe bourdeau portrait cinematic soldier with futuristic weapons in a dark universe environment -
+photorealistic beautiful girl, cyber punk, e-girl, Tron, futuristic weapons,fierce, aggressive, greek mythology, armor legend, photorealistic, highly detailed:: --v 4 -
+young woman photographer, holding a camera, short blonde hair, brown eyes, wide jaw, Wearing red coat with pins and black short skirt, full figure, full character, long legs, emotional:: old kyoto background, octane render, natural light, high detail, unreal engine, photography:: --v 4 -
+Cartoon --v 4 --ar 2:3
