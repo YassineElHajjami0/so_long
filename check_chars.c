@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/30 09:52:44 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:01:54 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    check_ckaracters(t_allvar *allvar)
         {
             if (allvar->tab[allvar->i][allvar->j] != '1' && allvar->tab[allvar->i][allvar->j] != '0'
             && allvar->tab[allvar->i][allvar->j] != 'P' && allvar->tab[allvar->i][allvar->j] != 'C'
-            && allvar->tab[allvar->i][allvar->j] != 'E')
+            && allvar->tab[allvar->i][allvar->j] != 'E' && allvar->tab[allvar->i][allvar->j] != 'N')
             {
                 write(2, "Eroor\n", 6);
                 exit(1);
@@ -36,6 +36,11 @@ void    check_ckaracters(t_allvar *allvar)
 
 void    is_rect(t_allvar *allvar)
 {
+    if(!allvar->tab[0])
+    {
+        write(2, "Eroor\n", 6);
+        exit(1);
+    }
     allvar->i = 0;
     allvar->j = 0;
     allvar->z = 0;
@@ -63,6 +68,7 @@ void    check_player_door(t_allvar *allvar)
     allvar->j = 0;
     allvar->z = 0;
     allvar->len = 0;
+    allvar->k = 0;
     while (allvar->tab[allvar->i])
     {
         allvar->j = 0;
@@ -72,18 +78,17 @@ void    check_player_door(t_allvar *allvar)
                 allvar->z += 1;
             else if (allvar->tab[allvar->i][allvar->j] == 'E')
                 allvar->len += 1;
+            else if (allvar->tab[allvar->i][allvar->j] == 'C')
+                allvar->k += 1;
             allvar->j++;
         }
         allvar->i++;
     }
-    printf("p => %d\n", allvar->z);
-    printf("p => %zu\n", allvar->len);
-    if(allvar->z != 1 || allvar->len != 1)
+    if(allvar->z != 1 || allvar->len != 1 || allvar->k <= 0)
     {
         write(2, "Eroor\n", 6);
         exit(1);
     }
-    printf("==========\n");
 }
 
 void checkmap(t_allvar *allvar)

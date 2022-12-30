@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/29 19:18:46 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:02:49 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ typedef struct s_allvar
     void    *mlx_image_hero;
     void    *mlx_image_door;
     void    *mlx_image_enemy;
+    void    *mlx_image_diamond;
     char    **tab;
     int     i;
     int     j;
     int     z;
+    int     k;
     size_t  len;
 }       t_allvar;
 

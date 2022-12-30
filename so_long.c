@@ -6,14 +6,12 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/30 09:46:54 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:04:29 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "get_next_line.h"
-
-
 
 char    **get_line(char *choosedmap)
 {
@@ -24,9 +22,19 @@ char    **get_line(char *choosedmap)
     line = NULL;
     str = ft_strdup("");
     fd = open(choosedmap, O_RDWR);
+    if(fd == -1)
+    {
+        write(2, "Eroor\n", 6);
+        exit(1);
+    }
     line = get_next_line(fd);
     while(line)
     {
+        if (line[0] == '\n')
+        {
+            write(2, "Eroor\n", 6);
+            exit(1);
+        }
         str = ft_strjoinn(str, line);
         free(line);
         line = get_next_line(fd);
@@ -40,6 +48,8 @@ void    display_themap(t_allvar *allvar)
     allvar->mlx_image_ground = mlx_xpm_file_to_image(allvar->mlx, "ground.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_hero = mlx_xpm_file_to_image(allvar->mlx, "hero.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_door = mlx_xpm_file_to_image(allvar->mlx, "door.xpm", &allvar->x, &allvar->y);
+    allvar->mlx_image_diamond = mlx_xpm_file_to_image(allvar->mlx, "diamond.xpm", &allvar->x, &allvar->y);
+    allvar->mlx_image_enemy = mlx_xpm_file_to_image(allvar->mlx, "enemy.xpm", &allvar->x, &allvar->y);
     allvar->i = 0;
     allvar->j = 0;
     allvar->x = 0;
@@ -55,9 +65,25 @@ void    display_themap(t_allvar *allvar)
             else if (allvar->tab[allvar->i][allvar->j] == '0')
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
             else if (allvar->tab[allvar->i][allvar->j] == 'P')
+            {
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->x, allvar->y);
+            }
             else if (allvar->tab[allvar->i][allvar->j] == 'E')
+            {
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_door, allvar->x, allvar->y);
+            }
+            else if (allvar->tab[allvar->i][allvar->j] == 'C')
+            {
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_diamond, allvar->x, allvar->y);
+            }
+            else if (allvar->tab[allvar->i][allvar->j] == 'N')
+            {
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, allvar->x, allvar->y);
+            }
             allvar->j++;
             allvar->x = allvar->j * 32;
         }
@@ -89,17 +115,41 @@ void    set_mlx_win(char *map, t_allvar *allvar)
     allvar->mlx_win = mlx_new_window(allvar->mlx, (int)allvar->len*32, allvar->i*32, "so_long");
 }
 
-
+int checkpoints(char **str, t_allvar *allvar)
+{
+    allvar->j = 0;
+    allvar->len = 0;
+    while(str[1][allvar->j])
+    {
+        if(str[1][allvar->j] == '.')
+            allvar->len++;
+        allvar->j++;
+    }
+    if(allvar->len != 1)
+        return (0);
+    return (1);
+}
 
 void    parsing(int ac, char **str, t_allvar *allvar)
 {
-    if (ac != 2)
+    if (ac != 2 || !checkpoints(str, allvar))
     {
         write(2, "Eroor\n", 6);
         exit(1);
     }
-    if(ft_strncmp(str[1],"map.ber",7) != 0 && ft_strncmp(str[1],"map1.ber",8) != 0 
-    && ft_strncmp(str[1],"map2.ber",8) != 0 && ft_strncmp(str[1],"map3.ber",8) != 0)
+    allvar->j = 0;
+    allvar->i = 0;
+    allvar->len = 4;
+    while (str[1][allvar->j])
+        allvar->j++;
+    if(allvar->j < 5)
+    {
+        write(2, "Eroor\n", 6);
+        exit(1);
+    }
+    allvar->j--;
+    if(str[1][allvar->j] != 'r' || str[1][allvar->j - 1] != 'e' 
+    || str[1][allvar->j - 2] != 'b' || str[1][allvar->j - 3] != '.')
     {
         write(2, "Eroor\n", 6);
         exit(1);
