@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/29 19:22:05 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/30 09:46:54 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void    display_themap(t_allvar *allvar)
     allvar->mlx_image_wall = mlx_xpm_file_to_image(allvar->mlx, "wall.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_ground = mlx_xpm_file_to_image(allvar->mlx, "ground.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_hero = mlx_xpm_file_to_image(allvar->mlx, "hero.xpm", &allvar->x, &allvar->y);
+    allvar->mlx_image_door = mlx_xpm_file_to_image(allvar->mlx, "door.xpm", &allvar->x, &allvar->y);
     allvar->i = 0;
     allvar->j = 0;
     allvar->x = 0;
@@ -55,6 +56,8 @@ void    display_themap(t_allvar *allvar)
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
             else if (allvar->tab[allvar->i][allvar->j] == 'P')
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->x, allvar->y);
+            else if (allvar->tab[allvar->i][allvar->j] == 'E')
+                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_door, allvar->x, allvar->y);
             allvar->j++;
             allvar->x = allvar->j * 32;
         }
