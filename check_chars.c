@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/30 16:01:54 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:43:45 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    check_ckaracters(t_allvar *allvar)
         {
             if (allvar->tab[allvar->i][allvar->j] != '1' && allvar->tab[allvar->i][allvar->j] != '0'
             && allvar->tab[allvar->i][allvar->j] != 'P' && allvar->tab[allvar->i][allvar->j] != 'C'
-            && allvar->tab[allvar->i][allvar->j] != 'E' && allvar->tab[allvar->i][allvar->j] != 'N')
+            && allvar->tab[allvar->i][allvar->j] != 'E' && allvar->tab[allvar->i][allvar->j] != 'A')
             {
                 write(2, "Eroor\n", 6);
                 exit(1);
