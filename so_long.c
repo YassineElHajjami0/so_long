@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/31 11:18:37 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:27:06 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,25 @@ void    check_up(t_allvar *allvar)
 {
     if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] != '1')
     {
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, (allvar->pos_py -1)*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->pos_px*32, (allvar->pos_py -1)*32);
-        allvar->pos_py -= 1;
+        if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] == 'C')
+        {
+            allvar->count_c--;
+            allvar->tab[allvar->pos_py - 1][allvar->pos_px] = '0';
+        }
+        if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] == 'E' && allvar->count_c == 0)
+        {
+            write(1, "YOU WON\n", 8);
+            exit(0);
+        }
+        else if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] != 'E')
+        {
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, (allvar->pos_py -1)*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->pos_px*32, (allvar->pos_py -1)*32);
+            allvar->pos_py -= 1;
+        }
+        else   
+            return ;
     }
 }
 
@@ -174,9 +189,24 @@ void    check_down(t_allvar *allvar)
 {
     if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] != '1')
     {
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, (allvar->pos_py + 1)*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->pos_px*32, (allvar->pos_py + 1)*32);
+        if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] == 'C')
+        {
+            allvar->count_c--;
+            allvar->tab[allvar->pos_py + 1][allvar->pos_px] = '0';
+        }  
+        if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] == 'E' && allvar->count_c == 0)
+        {
+            write(1, "YOU WON\n", 8);
+            exit(0);
+        }
+        else if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] != 'E')
+        {
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, (allvar->pos_py + 1)*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->pos_px*32, (allvar->pos_py + 1)*32);
+        }
+        else
+            return ;
         allvar->pos_py += 1;
     }
 }
@@ -185,9 +215,24 @@ void    check_left(t_allvar *allvar)
 {
     if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] != '1')
     {
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, (allvar->pos_px - 1)*32, allvar->pos_py *32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, (allvar->pos_px - 1)*32, allvar->pos_py*32);
+        if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] == 'C')
+        {
+            allvar->count_c--;
+            allvar->tab[allvar->pos_py][allvar->pos_px - 1] = '0';
+        }
+        if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] == 'E' && allvar->count_c == 0)
+        {
+            write(1, "YOU WON\n", 8);
+            exit(0);
+        }
+        else if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] != 'E')
+        {
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, (allvar->pos_px - 1)*32, allvar->pos_py *32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, (allvar->pos_px - 1)*32, allvar->pos_py*32);
+        }
+        else
+            return ;
         allvar->pos_px -= 1;
     }
 }
@@ -196,16 +241,31 @@ void    check_right(t_allvar *allvar)
 {
     if (allvar->tab[allvar->pos_py][allvar->pos_px + 1] != '1')
     {
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, (allvar->pos_px + 1)*32, allvar->pos_py *32);
-        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, (allvar->pos_px + 1)*32, allvar->pos_py*32);
+        if (allvar->tab[allvar->pos_py][allvar->pos_px + 1] == 'C')
+        {
+            allvar->count_c--;
+            allvar->tab[allvar->pos_py][allvar->pos_px + 1] = '0';
+        }
+        if (allvar->tab[allvar->pos_py][allvar->pos_px + 1] == 'E' && allvar->count_c == 0)
+        {
+            write(1, "YOU WON\n", 8);
+            exit(0);
+        }
+        else if (allvar->tab[allvar->pos_py][allvar->pos_px + 1] != 'E')
+        {
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, (allvar->pos_px + 1)*32, allvar->pos_py *32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, (allvar->pos_px + 1)*32, allvar->pos_py*32);
+        }
+        else
+            return ;
         allvar->pos_px += 1;
     }
 }
 
 int checkkey(int keycode, t_allvar *allvar)
 {
-    printf("pos P tab[%d][%d]\n", allvar->pos_py, allvar->pos_px);
+    printf("count l9ess =>%d\n", allvar->count_c);
     allvar->i = 0;
     if (keycode == 53)
         exit(0);
@@ -229,9 +289,10 @@ int main(int ac, char **av)
     parsing(ac, av, &allvar);
     allvar.tab = get_line(allvar.choosed_map);
     checkmap(&allvar);
+    printf("count of L9ess : %d\n", allvar.count_c);
     set_mlx_win("map.ber" ,&allvar);
     display_themap(&allvar);
-    mlx_key_hook(allvar.mlx_win, &checkkey, &allvar);
+    mlx_hook(allvar.mlx_win, 2, 1L<<0, &checkkey, &allvar);
     mlx_loop(allvar.mlx);
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/31 10:48:43 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:58:56 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_allvar
     size_t  len;
     int     pos_px;
     int     pos_py;
+    int     count_c;
 }       t_allvar;
 
 char	**ft_split(char const *s, char c);
