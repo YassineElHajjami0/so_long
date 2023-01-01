@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/31 11:58:56 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/01 15:07:17 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ typedef struct s_allvar
     int     count_c;
 }       t_allvar;
 
+char    **get_linee(char *choosedmap);
 char	**ft_split(char const *s, char c);
 void    check_walls(t_allvar *allvar);
 char	*ft_strjoinn(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-void checkmap(t_allvar *allvar);
+void checkmap(char *choosedmap, t_allvar *allvar);
+int checkkey(int keycode, t_allvar *allvar);
 
 #endif

@@ -6,6 +6,7 @@ SRC = so_long.c \
 	check_walls.c \
 	fn.c \
 	check_chars.c \
+	check_key.c \
 
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
