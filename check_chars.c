@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/01 15:27:43 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/02 08:13:33 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ int     valid(t_allvar *allvar,char **map, int y, int x)
     if(map[y][x] == 'E')
         return (1);
     map[y][x] = '1';
-    printf("map[%d][%d] = %c\n",y, x, map[y][x]);
-    printf("tab[%d][%d] = %c\n",y, x, allvar->tab[y][x]);
     if(valid(allvar, map, y, x + 1))
         return (1);
     else if(valid(allvar, map, y + 1, x))
@@ -131,15 +129,7 @@ void    check_backtracking(char *choosedmap, t_allvar *allvar)
         write(2, "Eroor\n", 6);
         exit(1);
     }
-    else 
-    {
-        printf("it's valid\n");
-    }
 }
-
-
-
-
 
 void checkmap(char *choosedmap, t_allvar *allvar)
 {

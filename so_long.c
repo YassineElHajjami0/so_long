@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/01 15:07:01 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/02 08:21:15 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,32 @@ void    parsing(int ac, char **str, t_allvar *allvar)
     allvar->choosed_map = str[1];
 }
 
+void    move_enemy(t_allvar *allvar, int i, int j)
+{
+    allvar->mlx_image_enemy = mlx_xpm_file_to_image(allvar->mlx, "enemy.xpm", &allvar->x, &allvar->y);
+    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, j*32, i*32);
+    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, j*32, i*32);
+}
 
+void    set_the_enemy(t_allvar *allvar)
+{
+    allvar->i = 0;
+    allvar->j = 0;
+    while(allvar->tab[allvar->i])
+    {
+        allvar->j = 0;
+        while(allvar->tab[allvar->i][allvar->j])
+        {
+            if (allvar->tab[allvar->i][allvar->j] != '1' && allvar->tab[allvar->i][allvar->j+1] != '1')
+            {
+                move_enemy(allvar, allvar->i, allvar->j);
+                return ;
+            }
+            allvar->j++;
+        }
+        allvar->i++;
+    }
+}
 
 int main(int ac, char **av)
 {
@@ -168,9 +193,9 @@ int main(int ac, char **av)
     parsing(ac, av, &allvar);
     allvar.tab = get_linee(allvar.choosed_map);
     checkmap(av[1], &allvar);
-    printf("count of L9ess : %d\n", allvar.count_c);
     set_mlx_win(av[1] ,&allvar);
     display_themap(&allvar);
+    set_the_enemy(&allvar);
     mlx_hook(allvar.mlx_win, 2, 1L<<0, &checkkey, &allvar);
     mlx_loop(allvar.mlx);
     return 0;
