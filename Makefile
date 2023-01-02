@@ -17,6 +17,7 @@ all : $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
+
 %.o : %.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 

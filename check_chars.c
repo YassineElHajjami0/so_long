@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 08:13:33 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:48:47 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,32 @@ void    check_backtracking(char *choosedmap, t_allvar *allvar)
     }
 }
 
+void    check_enemy_pos(t_allvar *allvar)
+{
+    allvar->i = 0;
+    allvar->j = 0;
+    while (allvar->tab[allvar->i])
+    {
+        allvar->j = 0;
+        while (allvar->tab[allvar->i][allvar->j])
+        {
+            if (allvar->tab[allvar->i][allvar->j] == 'A')
+            {
+                allvar->pos_enemyx = allvar->j;
+                allvar->pos_enemyy = allvar->i;
+            }
+            allvar->j++;
+        }
+        allvar->i++;
+    }
+}
+
 void checkmap(char *choosedmap, t_allvar *allvar)
 {
     check_ckaracters(allvar);
     is_rect(allvar);
     check_walls(allvar);
     check_player_door(allvar);
+    check_enemy_pos(allvar);
     check_backtracking(choosedmap, allvar);
 }

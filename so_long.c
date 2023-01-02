@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 08:21:15 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:39:14 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,32 +157,43 @@ void    parsing(int ac, char **str, t_allvar *allvar)
     allvar->choosed_map = str[1];
 }
 
-void    move_enemy(t_allvar *allvar, int i, int j)
+// int    set_the_enemy(t_allvar *allvar)
+// {
+//     allvar->i = 0;
+//     allvar->j = 0;
+//     while(allvar->tab[allvar->i])
+//     {
+//         allvar->j = 0;
+//         while(allvar->tab[allvar->i][allvar->j])
+//         {
+//             if (allvar->tab[allvar->i][allvar->j] == '0' && allvar->tab[allvar->i][allvar->j+1] == '0')
+//             {
+                
+//                 //move_enemy(allvar, allvar->i, allvar->j);
+//                 return 1;
+//             }
+//             allvar->j++;
+//         }
+//         allvar->i++;
+//     }
+//     return 1;
+// }
+
+int    move_enemy(t_allvar *allvar)
 {
-    allvar->mlx_image_enemy = mlx_xpm_file_to_image(allvar->mlx, "enemy.xpm", &allvar->x, &allvar->y);
-    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, j*32, i*32);
-    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, j*32, i*32);
+    if (allvar->tab[allvar->y][allvar->pos_enemyx+1] == '0')
+    {
+        allvar->tab[allvar->y][allvar->pos_enemyx+1] = 'A';
+        display_themap(allvar);
+    }
+    if (allvar->tab[allvar->y][allvar->pos_enemyx-1] == '0')
+    {
+        allvar->tab[allvar->y][allvar->pos_enemyx-1] = 'A';
+        display_themap(allvar);
+    }
+    return 0;
 }
 
-void    set_the_enemy(t_allvar *allvar)
-{
-    allvar->i = 0;
-    allvar->j = 0;
-    while(allvar->tab[allvar->i])
-    {
-        allvar->j = 0;
-        while(allvar->tab[allvar->i][allvar->j])
-        {
-            if (allvar->tab[allvar->i][allvar->j] != '1' && allvar->tab[allvar->i][allvar->j+1] != '1')
-            {
-                move_enemy(allvar, allvar->i, allvar->j);
-                return ;
-            }
-            allvar->j++;
-        }
-        allvar->i++;
-    }
-}
 
 int main(int ac, char **av)
 {
@@ -195,8 +206,13 @@ int main(int ac, char **av)
     checkmap(av[1], &allvar);
     set_mlx_win(av[1] ,&allvar);
     display_themap(&allvar);
-    set_the_enemy(&allvar);
+    //set_the_enemy(&allvar);
     mlx_hook(allvar.mlx_win, 2, 1L<<0, &checkkey, &allvar);
+    mlx_string_put(allvar.mlx, allvar.mlx_win, 10, 5,  255, "0");
+    printf("posx = %d,  posy = %d\n", allvar.pos_enemyx, allvar.pos_enemyy);
+    allvar.moves_count = 0;
+    //mlx_loop_hook(allvar.mlx, &move_enemy, &allvar);
     mlx_loop(allvar.mlx);
+    printf("-----------------\n");
     return 0;
 }
