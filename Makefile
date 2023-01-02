@@ -8,7 +8,7 @@ SRC = so_long.c \
 	check_chars.c \
 	check_key.c \
 
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 CC = cc
 OBJ = $(SRC:.c=.o)
 

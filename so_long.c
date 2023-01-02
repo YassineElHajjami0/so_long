@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 16:39:14 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/02 17:51:53 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,19 +181,43 @@ void    parsing(int ac, char **str, t_allvar *allvar)
 
 int    move_enemy(t_allvar *allvar)
 {
-    if (allvar->tab[allvar->y][allvar->pos_enemyx+1] == '0')
+    static int i;
+    static int z;
+    if (i == 5500)
     {
-        allvar->tab[allvar->y][allvar->pos_enemyx+1] = 'A';
-        display_themap(allvar);
+        if (allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0' || allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
+        {
+            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
+            {
+                write(1, "YOU LOSE\n", 9);
+                exit(0);
+            }
+            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_enemyx*32, allvar->pos_enemyy*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy,  (allvar->pos_enemyx + 1)*32, allvar->pos_enemyy*32);
+            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] = 'A';
+            allvar->pos_enemyx++;
+            //display_themap(allvar);    
+            printf("*********************\n");
+        }
+        else
+        {
+            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] == 'P')
+            {
+                write(1, "YOU LOSE\n", 9);
+                exit(0);
+            }
+            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
+            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx-1] = 'A';
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_enemyx*32, allvar->pos_enemyy*32);
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy,  (allvar->pos_enemyx - 1)*32, allvar->pos_enemyy*32);
+            allvar->pos_enemyx--;
+        }
+        i = 0;
     }
-    if (allvar->tab[allvar->y][allvar->pos_enemyx-1] == '0')
-    {
-        allvar->tab[allvar->y][allvar->pos_enemyx-1] = 'A';
-        display_themap(allvar);
-    }
+    i++;
     return 0;
 }
-
 
 int main(int ac, char **av)
 {
@@ -206,13 +230,11 @@ int main(int ac, char **av)
     checkmap(av[1], &allvar);
     set_mlx_win(av[1] ,&allvar);
     display_themap(&allvar);
-    //set_the_enemy(&allvar);
     mlx_hook(allvar.mlx_win, 2, 1L<<0, &checkkey, &allvar);
     mlx_string_put(allvar.mlx, allvar.mlx_win, 10, 5,  255, "0");
     printf("posx = %d,  posy = %d\n", allvar.pos_enemyx, allvar.pos_enemyy);
     allvar.moves_count = 0;
-    //mlx_loop_hook(allvar.mlx, &move_enemy, &allvar);
+    mlx_loop_hook(allvar.mlx, &move_enemy, &allvar);
     mlx_loop(allvar.mlx);
-    printf("-----------------\n");
     return 0;
 }
