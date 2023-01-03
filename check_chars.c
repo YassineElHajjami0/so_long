@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 14:48:47 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:18:21 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void checkmap(char *choosedmap, t_allvar *allvar)
 {
     check_ckaracters(allvar);
     is_rect(allvar);
+
     check_walls(allvar);
     check_player_door(allvar);
     check_enemy_pos(allvar);

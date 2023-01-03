@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 10:07:16 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 15:50:18 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:19:05 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void    check_up(t_allvar *allvar)
         else if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] != 'E')
         {
             allvar->moves_count++;
+            allvar->tab[allvar->pos_py][allvar->pos_px] = '0';
+            allvar->tab[allvar->pos_py - 1][allvar->pos_px] = 'P';
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
             mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
@@ -120,6 +122,8 @@ void    check_down(t_allvar *allvar)
         else if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] != 'E')
         {
             allvar->moves_count++;
+            allvar->tab[allvar->pos_py][allvar->pos_px] = '0';
+            allvar->tab[allvar->pos_py + 1][allvar->pos_px] = 'P';
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
             mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
@@ -139,8 +143,6 @@ void    check_left(t_allvar *allvar)
         if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] == 'C')
         {
             allvar->moves_count++;
-            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
-            mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
             allvar->count_c--;
             allvar->tab[allvar->pos_py][allvar->pos_px - 1] = '0';
         }
@@ -157,6 +159,8 @@ void    check_left(t_allvar *allvar)
         else if (allvar->tab[allvar->pos_py][allvar->pos_px - 1] != 'E')
         {
             allvar->moves_count++;
+            allvar->tab[allvar->pos_py][allvar->pos_px] = '0';
+            allvar->tab[allvar->pos_py][allvar->pos_px - 1] = 'P';
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
             mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);
@@ -194,6 +198,8 @@ void    check_right(t_allvar *allvar)
         else if (allvar->tab[allvar->pos_py][allvar->pos_px + 1] != 'E')
         {
             allvar->moves_count++;
+            allvar->tab[allvar->pos_py][allvar->pos_px + 1] = 'P';
+            allvar->tab[allvar->pos_py][allvar->pos_px] = '0';
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
             mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
             mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_px*32, allvar->pos_py*32);

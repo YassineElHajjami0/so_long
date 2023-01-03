@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 15:31:15 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:10:29 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_allvar
     void    *mlx_image_hero;
     void    *mlx_image_door;
     void    *mlx_image_enemy;
+    void    *mlx_image_enemyy;
     void    *mlx_image_diamond;
     char    **tab;
     int     i;
@@ -52,5 +53,6 @@ char	*ft_strdup(const char *s1);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void checkmap(char *choosedmap, t_allvar *allvar);
 int checkkey(int keycode, t_allvar *allvar);
+char	*ft_itoa(int n);
 
 #endif

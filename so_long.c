@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/02 17:51:53 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:32:21 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void    display_themap(t_allvar *allvar)
     allvar->mlx_image_door = mlx_xpm_file_to_image(allvar->mlx, "door.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_diamond = mlx_xpm_file_to_image(allvar->mlx, "diamond.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_enemy = mlx_xpm_file_to_image(allvar->mlx, "enemy.xpm", &allvar->x, &allvar->y);
+    allvar->mlx_image_enemyy = mlx_xpm_file_to_image(allvar->mlx, "enemyy.xpm", &allvar->x, &allvar->y);
     allvar->i = 0;
     allvar->j = 0;
     allvar->x = 0;
@@ -82,7 +83,16 @@ void    display_themap(t_allvar *allvar)
             else if (allvar->tab[allvar->i][allvar->j] == 'A')
             {
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, allvar->x, allvar->y);
+                if(allvar->z == 0)
+                {    
+                    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, allvar->x, allvar->y);
+                    allvar->z = 1;
+                }
+                else
+                {
+                    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemyy, allvar->x, allvar->y);
+                    allvar->z = 0;
+                }
             }
             allvar->j++;
             allvar->x = allvar->j * 32;
@@ -90,6 +100,8 @@ void    display_themap(t_allvar *allvar)
         allvar->i++;
         allvar->y = allvar->i * 32;
     }
+    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_wall, 0 , 0);
+    mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5,  255, ft_itoa(allvar->moves_count));
 }
 
 void    set_mlx_win(char *map, t_allvar *allvar)
@@ -179,13 +191,32 @@ void    parsing(int ac, char **str, t_allvar *allvar)
 //     return 1;
 // }
 
+void    tba3(t_allvar *allvar)
+{
+    allvar->i = 0;
+    allvar->j = 0;
+    
+    while(allvar->tab[allvar->i])
+    {
+        allvar->j = 0;
+        while(allvar->tab[allvar->i][allvar->j])
+        {
+            printf("%c",allvar->tab[allvar->i][allvar->j]);
+            allvar->j++;
+        }
+        printf("\n");
+        allvar->i++;
+    }
+}
+
 int    move_enemy(t_allvar *allvar)
 {
     static int i;
     static int z;
-    if (i == 5500)
+    if (i == 5000)
     {
-        if (allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0' || allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
+        //tba3(allvar);
+        if (z == 0 &&( allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0' || allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P'))
         {
             if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
             {
@@ -193,24 +224,27 @@ int    move_enemy(t_allvar *allvar)
                 exit(0);
             }
             allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
-            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_enemyx*32, allvar->pos_enemyy*32);
-            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy,  (allvar->pos_enemyx + 1)*32, allvar->pos_enemyy*32);
             allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] = 'A';
             allvar->pos_enemyx++;
-            //display_themap(allvar);    
-            printf("*********************\n");
+            display_themap(allvar);    
         }
         else
         {
-            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] == 'P')
+            z = 1;
+            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] == 'P')
             {
                 write(1, "YOU LOSE\n", 9);
                 exit(0);
             }
+            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != '0' && allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != 'P')
+            {
+                i = 1000;
+                z = 0;
+                return 0;
+            }
             allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
             allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx-1] = 'A';
-            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->pos_enemyx*32, allvar->pos_enemyy*32);
-            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy,  (allvar->pos_enemyx - 1)*32, allvar->pos_enemyy*32);
+            display_themap(allvar);    
             allvar->pos_enemyx--;
         }
         i = 0;
@@ -224,6 +258,8 @@ int main(int ac, char **av)
     t_allvar allvar;
 
     allvar.tab = NULL;
+    allvar.z = 0;
+    allvar.moves_count = 0;
     allvar.mlx = mlx_init();
     parsing(ac, av, &allvar);
     allvar.tab = get_linee(allvar.choosed_map);
