@@ -7,6 +7,8 @@ SRC = so_long.c \
 	fn.c \
 	check_chars.c \
 	check_key.c \
+	backtracking.c \
+	check_l_r.c \
 
 # CFLAGS = -Wall -Wextra -Werror
 CC = cc

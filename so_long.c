@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/03 13:56:43 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:09:57 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,28 +167,6 @@ void    parsing(int ac, char **str, t_allvar *allvar)
     }
     allvar->choosed_map = str[1];
 }
-
-// int    set_the_enemy(t_allvar *allvar)
-// {
-//     allvar->i = 0;
-//     allvar->j = 0;
-//     while(allvar->tab[allvar->i])
-//     {
-//         allvar->j = 0;
-//         while(allvar->tab[allvar->i][allvar->j])
-//         {
-//             if (allvar->tab[allvar->i][allvar->j] == '0' && allvar->tab[allvar->i][allvar->j+1] == '0')
-//             {
-                
-//                 //move_enemy(allvar, allvar->i, allvar->j);
-//                 return 1;
-//             }
-//             allvar->j++;
-//         }
-//         allvar->i++;
-//     }
-//     return 1;
-// }
 
 void    tba3(t_allvar *allvar)
 {

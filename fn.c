@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:49:12 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/12/29 18:50:47 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:32:46 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,50 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+static	int	count(long num)
+{
+	int	i;
+
+	i = 0;
+	if (num <= 0)
+	{
+		i++;
+		num = -num;
+	}
+	while (num != 0)
+	{
+		num /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	int		i;
+	char	*p;
+	long	nn;
+
+	i = count((long)n);
+	nn = (long)n;
+	if (nn < 0)
+		nn = -nn;
+	p = (char *)malloc(sizeof(char) * i + 1);
+	if (!p)
+		return (NULL);
+	p[i] = '\0';
+	i--;
+	while (i > 0)
+	{
+		p[i] = nn % 10 + '0';
+		nn /= 10;
+		i--;
+	}
+	if (n < 0)
+		p[i] = '-';
+	else
+		p[i] = nn + '0';
+	return (p);
 }
