@@ -9,6 +9,10 @@ SRC = so_long.c \
 	check_key.c \
 	backtracking.c \
 	check_l_r.c \
+	parsing_win.c \
+	move_enemy.c \
+	display_map.c \
+	check_p_d_e.c \
 
 # CFLAGS = -Wall -Wextra -Werror
 CC = cc
