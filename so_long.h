@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 11:08:05 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:07:12 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef struct s_allvar
     int     pos_enemyy;
     int     count_c;
     int     moves_count;
-    char    **map1;
-    char    **map2;
+    int     move_l;
 }       t_allvar;
 
 char    **get_linee(char *choosedmap);

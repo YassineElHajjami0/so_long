@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 11:09:57 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:11:42 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char    **get_linee(char *choosedmap)
     return (ft_split(str, '\n'));
 }
 
-void    display_themap(t_allvar *allvar)
+void    display_vrs(t_allvar *allvar)
 {
     allvar->mlx_image_wall = mlx_xpm_file_to_image(allvar->mlx, "wall.xpm", &allvar->x, &allvar->y);
     allvar->mlx_image_ground = mlx_xpm_file_to_image(allvar->mlx, "ground.xpm", &allvar->x, &allvar->y);
@@ -55,6 +55,39 @@ void    display_themap(t_allvar *allvar)
     allvar->j = 0;
     allvar->x = 0;
     allvar->y = 0;
+}
+
+void    second_part(t_allvar *allvar)
+{   
+    if (allvar->tab[allvar->i][allvar->j] == 'E')
+    {
+        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
+        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_door, allvar->x, allvar->y);
+    }
+    else if (allvar->tab[allvar->i][allvar->j] == 'C')
+    {
+        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
+        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_diamond, allvar->x, allvar->y);
+    }
+    else if (allvar->tab[allvar->i][allvar->j] == 'A')
+    {
+        mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
+        if(allvar->z == 0)
+        {    
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, allvar->x, allvar->y);
+            allvar->z = 1;
+        }
+        else
+        {
+            mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemyy, allvar->x, allvar->y);
+            allvar->z = 0;
+        }
+    }
+}
+
+void    display_themap(t_allvar *allvar)
+{
+    display_vrs(allvar);
     while (allvar->tab[allvar->i])
     {
         allvar->j = 0;
@@ -70,31 +103,7 @@ void    display_themap(t_allvar *allvar)
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
                 mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_hero, allvar->x, allvar->y);
             }
-            else if (allvar->tab[allvar->i][allvar->j] == 'E')
-            {
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_door, allvar->x, allvar->y);
-            }
-            else if (allvar->tab[allvar->i][allvar->j] == 'C')
-            {
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_diamond, allvar->x, allvar->y);
-            }
-            else if (allvar->tab[allvar->i][allvar->j] == 'A')
-            {
-                mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_ground, allvar->x, allvar->y);
-                if(allvar->z == 0)
-                {    
-                    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemy, allvar->x, allvar->y);
-                    allvar->z = 1;
-                }
-                else
-                {
-                    mlx_put_image_to_window(allvar->mlx, allvar->mlx_win, allvar->mlx_image_enemyy, allvar->x, allvar->y);
-                    allvar->z = 0;
-                }
-            }
-            
+            second_part(allvar);
             allvar->x = ++allvar->j * 32;
         }
         allvar->y = ++allvar->i * 32;
@@ -186,47 +195,54 @@ void    tba3(t_allvar *allvar)
     }
 }
 
+void    move_right(t_allvar *allvar)
+{
+    if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
+    {
+        write(1, "YOU LOSE\n", 9);
+        exit(0);
+    }
+    allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
+    allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] = 'A';
+    allvar->pos_enemyx++;
+    display_themap(allvar);   
+}
+
+int    move_left(t_allvar *allvar)
+{
+    allvar->move_l = 1;
+    if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] == 'P')
+    {
+        write(1, "YOU LOSE\n", 9);
+        exit(0);
+    }
+    if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != '0' && allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != 'P')
+    {
+        allvar->i = 1000;
+        allvar->move_l = 0;
+        return 0;
+    }
+    allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
+    allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx-1] = 'A';
+    display_themap(allvar);    
+    allvar->pos_enemyx--;
+    return 1;
+}
+
 int    move_enemy(t_allvar *allvar)
 {
-    static int i;
-    static int z;
-    if (i == 5000)
+    if (allvar->i == 5000)
     {
-        //tba3(allvar);
-        if (z == 0 &&( allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0' || allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P'))
-        {
-            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P')
-            {
-                write(1, "YOU LOSE\n", 9);
-                exit(0);
-            }
-            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
-            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] = 'A';
-            allvar->pos_enemyx++;
-            display_themap(allvar);    
-        }
+        if (allvar->move_l == 0 &&( allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0' || allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P'))
+            move_right(allvar);
         else
         {
-            z = 1;
-            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] == 'P')
-            {
-                write(1, "YOU LOSE\n", 9);
-                exit(0);
-            }
-            if(allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != '0' && allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != 'P')
-            {
-                i = 1000;
-                z = 0;
+            if(!move_left(allvar))
                 return 0;
-            }
-            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx] = '0';
-            allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx-1] = 'A';
-            display_themap(allvar);    
-            allvar->pos_enemyx--;
         }
-        i = 0;
+        allvar->i = 0;
     }
-    i++;
+    allvar->i++;
     return 0;
 }
 
