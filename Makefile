@@ -13,22 +13,22 @@ SRC = so_long.c \
 	move_enemy.c \
 	display_map.c \
 	check_p_d_e.c \
+	strput_destroy.c \
 
 # CFLAGS = -Wall -Wextra -Werror
 CC = cc
-OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 
 %.o : %.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean :
-	rm -rf $(OBJ)
+	rm -rf $(NAME)
 
 fclean : clean
 	rm -rf $(NAME)

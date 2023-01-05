@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:49:12 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 12:19:48 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:29:16 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*ft_strjoinn(char const *s1, char const *s2)
 	while (s2[++i])
 		l[++j] = s2[i];
 	l[++j] = '\0';
+	free((char *)s1);
 	return (l);
 }
 

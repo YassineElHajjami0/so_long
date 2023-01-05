@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:18:27 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 14:37:23 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:32:44 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,17 @@ char	**get_linee(char *choosedmap)
 		free(line);
 		line = get_next_line(fd);
 	}
-	return (ft_split(str, '\n'));
+	return (free(line), ft_split(str, '\n'));
 }
 
 void	set_mlx_win(char *map, t_allvar *allvar)
 {
 	int		fd;
 	char	*line;
-	char	*str;
 
 	allvar->i = 0;
 	allvar->len = 0;
 	line = NULL;
-	str = ft_strdup("");
 	fd = open(map, O_RDWR);
 	line = get_next_line(fd);
 	if (line)

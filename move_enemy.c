@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:21:51 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 14:37:12 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:49:29 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ int	move_enemy(t_allvar *allvar)
 		if (allvar->move_l == 0
 			&& (allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0'
 			|| allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P'))
+		{
 			move_right(allvar);
+			mlx_destroy_image(allvar->mlx, allvar->mlx_image_enemy);
+			mlx_destroy_image(allvar->mlx, allvar->mlx_image_enemyy);
+		}	
 		else
 		{
 			if (!move_left(allvar))

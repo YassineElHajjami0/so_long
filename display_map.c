@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:32:19 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 14:42:33 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:09:38 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	first_part(t_allvar *allvar)
 void	display_themap(t_allvar *allvar)
 {
 	display_vrs(allvar);
+	check_vars(allvar);
 	while (allvar->tab[allvar->i])
 	{
 		allvar->j = 0;
@@ -108,6 +109,5 @@ void	display_themap(t_allvar *allvar)
 	}
 	mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
 		allvar->mlx_image_wall, 0, 0);
-	mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5, 255,
-		ft_itoa(allvar->moves_count));
+	print_str_put(allvar);
 }

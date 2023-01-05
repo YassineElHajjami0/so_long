@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 14:38:13 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:09:53 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,9 @@ int		move_enemy(t_allvar *allvar);
 void	display_themap(t_allvar *allvar);
 void	check_enemy_pos(t_allvar *allvar);
 void	check_player_door(t_allvar *allvar);
+void	destroy_all(t_allvar *allvar);
+void	print_str_put(t_allvar *allvar);
+void	freemap(char **s);
+void	check_vars(t_allvar *allvar);
 
 #endif

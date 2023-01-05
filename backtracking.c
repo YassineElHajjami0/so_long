@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 10:28:33 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 13:43:19 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:23:12 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void	show_error(int num)
 	exit(1);
 }
 
+void	freemap(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		free(s[i++]);
+	free(s);
+}
+
 void	check_backtracking(char *choosedmap, t_allvar *allvar)
 {
 	char	**map;
@@ -52,10 +62,11 @@ void	check_backtracking(char *choosedmap, t_allvar *allvar)
 		while (map[allvar->i][allvar->j])
 		{
 			if (map[allvar->i][allvar->j] == 'E'
-			|| map[allvar->i][allvar->j] == 'C')
+				|| map[allvar->i][allvar->j] == 'C')
 			{
 				if (!valid(allvar, map, allvar->i, allvar->j))
 					show_error(2);
+				freemap(map);
 				map = map1;
 			}
 			allvar->j++;
