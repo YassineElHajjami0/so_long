@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:09:10 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 12:13:32 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:04:55 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,21 @@ void	check_vars(t_allvar *allvar)
 	}
 }
 
-void	print_str_put(t_allvar *allvar)
+void	print_ter(t_allvar *allvar, int bonus)
+{
+	if (bonus == 1)
+		return ;
+	allvar->moves_num++;
+	ft_putnbr(allvar->moves_num);
+	write(1, "\n", 1);
+}
+
+void	print_str_put(t_allvar *allvar, int bonus)
 {
 	char	*p;
 
+	if (bonus == 0)
+		return ;
 	p = ft_itoa(allvar->moves_count);
 	mlx_string_put(allvar->mlx, allvar->mlx_win, 10, 5, 255, p);
 	free(p);

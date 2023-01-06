@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:58:02 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 14:32:47 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:43:28 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	check_player_door(t_allvar *allvar)
 
 void	check_enemy_pos(t_allvar *allvar)
 {
+	if (allvar->bonus == 0)
+		return ;
 	allvar->i = 0;
 	allvar->j = 0;
 	while (allvar->tab[allvar->i])
@@ -67,5 +69,34 @@ void	check_enemy_pos(t_allvar *allvar)
 			allvar->j++;
 		}
 		allvar->i++;
+	}
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+	{
+		write(1, "-", 1);
+		write(1, "2", 1);
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		ft_putchar(n + 48);
 	}
 }

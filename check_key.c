@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 10:07:16 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 11:35:56 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:04:04 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	help_check_u_d(t_allvar *allvar, int sign)
 	allvar->tab[allvar->pos_py + sign][allvar->pos_px] = 'P';
 	mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
 		allvar->mlx_image_wall, 0, 0);
-	print_str_put(allvar);
+	print_str_put(allvar, allvar->bonus);
+	print_ter(allvar, allvar->bonus);
 	mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
 		allvar->mlx_image_ground, allvar->pos_px * 32, allvar->pos_py * 32);
 	mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
@@ -48,7 +49,6 @@ void	check_up(t_allvar *allvar)
 		{
 			mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
 				allvar->mlx_image_wall, 0, 0);
-			print_str_put(allvar);
 			allvar->count_c-- ;
 			allvar->tab[allvar->pos_py - 1][allvar->pos_px] = '0';
 		}
@@ -74,7 +74,6 @@ void	check_down(t_allvar *allvar)
 		{
 			mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
 				allvar->mlx_image_wall, 0, 0);
-			print_str_put(allvar);
 			allvar->count_c--;
 			allvar->tab[allvar->pos_py + 1][allvar->pos_px] = '0';
 		}

@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 12:09:53 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:52:31 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 # include <mlx.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_allvar
 {
@@ -44,6 +44,8 @@ typedef struct s_allvar
 	int		count_c;
 	int		moves_count;
 	int		move_l;
+	int		moves_num;
+	int		bonus;
 }		t_allvar;
 
 char	**get_linee(char *choosedmap);
@@ -65,8 +67,10 @@ void	display_themap(t_allvar *allvar);
 void	check_enemy_pos(t_allvar *allvar);
 void	check_player_door(t_allvar *allvar);
 void	destroy_all(t_allvar *allvar);
-void	print_str_put(t_allvar *allvar);
+void	print_str_put(t_allvar *allvar, int bonus);
 void	freemap(char **s);
 void	check_vars(t_allvar *allvar);
+void	ft_putnbr(int n);
+void	print_ter(t_allvar *allvar, int bonus);
 
 #endif

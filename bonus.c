@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 10:33:07 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 16:11:39 by yel-hajj         ###   ########.fr       */
+/*   Created: 2023/01/06 13:50:50 by yel-hajj          #+#    #+#             */
+/*   Updated: 2023/01/06 16:11:30 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	allvar.z = 0;
 	allvar.moves_num = 0;
 	allvar.moves_count = 0;
-	allvar.bonus = 0;
+	allvar.bonus = 1;
 	allvar.mlx = mlx_init();
 	parsing(ac, av, &allvar);
 	allvar.tab = get_linee(allvar.choosed_map);

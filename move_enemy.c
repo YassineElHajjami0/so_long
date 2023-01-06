@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:21:51 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 09:49:29 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:51:30 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	move_left(t_allvar *allvar)
 
 int	move_enemy(t_allvar *allvar)
 {
+	if (allvar->bonus == 0)
+		return (0);
 	if (allvar->i == 5000)
 	{
 		if (allvar->move_l == 0

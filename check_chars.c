@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:52:53 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 08:56:50 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:03:46 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 void	check_alpha(t_allvar *allvar)
 {
+	if (allvar->bonus == 1)
+	{
+		if (allvar->tab[allvar->i][allvar->j] != '1'
+		&& allvar->tab[allvar->i][allvar->j] != '0'
+		&& allvar->tab[allvar->i][allvar->j] != 'P'
+		&& allvar->tab[allvar->i][allvar->j] != 'C'
+		&& allvar->tab[allvar->i][allvar->j] != 'E'
+		&& allvar->tab[allvar->i][allvar->j] != 'A')
+		{
+			write(2, "Eroor\n", 6);
+			exit(1);
+		}
+	}
 	if (allvar->tab[allvar->i][allvar->j] != '1'
 	&& allvar->tab[allvar->i][allvar->j] != '0'
 	&& allvar->tab[allvar->i][allvar->j] != 'P'
 	&& allvar->tab[allvar->i][allvar->j] != 'C'
 	&& allvar->tab[allvar->i][allvar->j] != 'E'
-	&& allvar->tab[allvar->i][allvar->j] != 'A')
+	&& allvar->bonus == 0)
 	{
 		write(2, "Eroor\n", 6);
 		exit(1);
