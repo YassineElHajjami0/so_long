@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 10:28:33 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 17:23:12 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:01:38 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ void	freemap(char **s)
 void	check_backtracking(char *choosedmap, t_allvar *allvar)
 {
 	char	**map;
-	char	**map1;
 
 	allvar->i = 0;
 	allvar->j = 0;
 	map = get_linee(choosedmap);
-	map1 = get_linee(choosedmap);
 	while (map[allvar->i])
 	{
 		allvar->j = 0;
@@ -67,10 +65,11 @@ void	check_backtracking(char *choosedmap, t_allvar *allvar)
 				if (!valid(allvar, map, allvar->i, allvar->j))
 					show_error(2);
 				freemap(map);
-				map = map1;
+				map = get_linee(choosedmap);
 			}
 			allvar->j++;
 		}
 		allvar->i++;
 	}
+	freemap(map);
 }
