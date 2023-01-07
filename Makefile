@@ -1,4 +1,9 @@
 NAME = so_long
+BONS = so_long_bonus
+CFLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
+CC = cc
+
+
 SRC = so_long.c \
 	get_next_line.c \
 	get_next_line_utils.c \
@@ -15,7 +20,7 @@ SRC = so_long.c \
 	check_p_d_e.c \
 	strput_destroy.c \
 
-BNS = bonus.c \
+BNS = the_bonus.c \
 	get_next_line.c \
 	get_next_line_utils.c \
 	split.c \
@@ -30,22 +35,21 @@ BNS = bonus.c \
 	display_map.c \
 	check_p_d_e.c \
 	strput_destroy.c \
-# CFLAGS = -Wall -Wextra -Werror
-CC = cc
 
 all : $(NAME)
 
 $(NAME): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
+$(BONS): $(BNS)
+	$(CC) $(CFLAGS) $(BNS) -o $(BONS)
 
-%.o : %.c
-	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+bonus: $(BONS)
 
 clean :
 	rm -rf $(NAME)
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -rf $(BONS)
 
 re : fclean all

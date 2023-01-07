@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:58:02 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 15:43:28 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:39:20 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	check_enemy_pos(t_allvar *allvar)
 		return ;
 	allvar->i = 0;
 	allvar->j = 0;
+	allvar->z = 0;
 	while (allvar->tab[allvar->i])
 	{
 		allvar->j = 0;
@@ -65,11 +66,14 @@ void	check_enemy_pos(t_allvar *allvar)
 			{
 				allvar->pos_enemyx = allvar->j;
 				allvar->pos_enemyy = allvar->i;
+				allvar->z++;
 			}
 			allvar->j++;
 		}
 		allvar->i++;
 	}
+	if (allvar->z < 1)
+		show_error(2);
 }
 
 void	ft_putchar(char c)

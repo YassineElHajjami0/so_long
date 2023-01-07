@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:49:12 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 18:29:16 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:01:53 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strjoinn(char const *s1, char const *s2)
 	char	*l;
 
 	if (!s1 || !s2)
-		return (NULL);
+		show_error(2);
 	i = 0;
 	while (s1[i])
 		i++;
@@ -28,7 +28,7 @@ char	*ft_strjoinn(char const *s1, char const *s2)
 		j++;
 	l = (char *)malloc(sizeof(char) * (i + j + 1));
 	if (!l)
-		return (NULL);
+		show_error(2);
 	i = -1;
 	j = -1;
 	while (s1[++i])
@@ -51,7 +51,7 @@ char	*ft_strdup(const char *s1)
 		i++;
 	p = (char *)malloc(sizeof(char) * i + 1);
 	if (!p)
-		return (NULL);
+		show_error(2);
 	i = -1;
 	while (s1[++i])
 		p[i] = s1[i];
@@ -107,7 +107,7 @@ char	*ft_itoa(int n)
 		nn = -nn;
 	p = (char *)malloc(sizeof(char) * i + 1);
 	if (!p)
-		return (NULL);
+		show_error(2);
 	p[i] = '\0';
 	i--;
 	while (i > 0)

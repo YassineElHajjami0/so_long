@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:32:19 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 15:45:35 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:05:02 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,5 @@ void	display_themap(t_allvar *allvar)
 		}
 		allvar->y = ++allvar->i * 32;
 	}
-	mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
-		allvar->mlx_image_wall, 0, 0);
 	print_str_put(allvar, allvar->bonus);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 10:07:16 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 16:04:04 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:21:21 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ void	check_up(t_allvar *allvar)
 	{
 		if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] == 'C')
 		{
-			mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
-				allvar->mlx_image_wall, 0, 0);
-			allvar->count_c-- ;
+			allvar->count_c--;
 			allvar->tab[allvar->pos_py - 1][allvar->pos_px] = '0';
 		}
 		if (allvar->tab[allvar->pos_py - 1][allvar->pos_px] == 'A')
@@ -72,8 +70,6 @@ void	check_down(t_allvar *allvar)
 	{
 		if (allvar->tab[allvar->pos_py + 1][allvar->pos_px] == 'C')
 		{
-			mlx_put_image_to_window(allvar->mlx, allvar->mlx_win,
-				allvar->mlx_image_wall, 0, 0);
 			allvar->count_c--;
 			allvar->tab[allvar->pos_py + 1][allvar->pos_px] = '0';
 		}

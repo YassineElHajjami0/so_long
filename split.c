@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 10:21:40 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/05 11:35:27 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:04:17 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	char	*bringarray(char *s1, int cp)
 
 	p = (char *)malloc(sizeof(char) * cp + 1);
 	if (!p)
-		return (NULL);
+		show_error(2);
 	i = 0;
 	while (i < cp)
 	{
@@ -98,7 +98,7 @@ char	**ft_split(char const *s, char c)
 	l = countwords((char *)s, c);
 	pp = (char **)malloc(sizeof(char *) * (l + 1));
 	if (!pp)
-		return (NULL);
+		show_error(2);
 	fillarrays(pp, (char *)s, l, c);
 	free((char *)s);
 	return (pp);

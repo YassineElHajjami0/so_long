@@ -6,10 +6,11 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:30:01 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/11/19 11:05:34 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:02:51 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "so_long.h"
 #include "get_next_line.h"
 
 char	*ft_strjoin(char *sta, char *buff)
@@ -27,7 +28,7 @@ char	*ft_strjoin(char *sta, char *buff)
 		return (NULL);
 	s = malloc((ft_strlen(sta) + ft_strlen(buff)) + 1);
 	if (!s)
-		return (NULL);
+		show_error(2);
 	i = -1;
 	j = 0;
 	while (sta[++i] != '\0')
@@ -56,7 +57,7 @@ char	*putleftinsta(char *sta)
 	}
 	s = (char *)malloc(ft_strlen(sta) - i + 1);
 	if (!s)
-		return (NULL);
+		show_error(2);
 	i++;
 	j = 0;
 	while (sta[i])

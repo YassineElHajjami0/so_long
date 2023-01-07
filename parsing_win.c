@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:18:27 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/04 18:32:44 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:59:20 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,9 @@ void	set_mlx_win(char *map, t_allvar *allvar)
 			(int)allvar->len * 32, allvar->i * 32, "so_long");
 }
 
-int	checkpoints(char **str, t_allvar *allvar)
-{
-	allvar->j = 0;
-	allvar->len = 0;
-	while (str[1][allvar->j])
-	{
-		if (str[1][allvar->j] == '.')
-		allvar->len++;
-		allvar->j++;
-	}
-	if (allvar->len != 1)
-		return (0);
-	return (1);
-}
-
 void	parsing(int ac, char **str, t_allvar *allvar)
 {
-	if (ac != 2 || !checkpoints(str, allvar))
+	if (ac != 2)
 	{
 		write(2, "Eroor\n", 6);
 		exit(1);

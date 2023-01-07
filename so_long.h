@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:22:24 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 15:52:31 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:00:39 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	freemap(char **s);
 void	check_vars(t_allvar *allvar);
 void	ft_putnbr(int n);
 void	print_ter(t_allvar *allvar, int bonus);
+void	show_error(int num);
 
 #endif

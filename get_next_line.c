@@ -6,11 +6,12 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:15:16 by yel-hajj          #+#    #+#             */
-/*   Updated: 2022/11/19 11:34:36 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:03:47 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "so_long.h"
 
 char	*get_next_line(int fd)
 {
@@ -39,7 +40,7 @@ char	*putins(char *sta)
 		i++;
 	s = (char *)malloc(i + 2);
 	if (!s)
-		return (NULL);
+		show_error(2);
 	i = 0;
 	while (sta[i] && sta[i] != '\n')
 	{
@@ -62,7 +63,7 @@ char	*putinsta(int fd, char *sta)
 
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
-		return (NULL);
+		show_error(2);
 	x = 1;
 	while (!ft_strchr(sta, '\n') && x != 0)
 	{

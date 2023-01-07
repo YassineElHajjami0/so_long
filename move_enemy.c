@@ -6,7 +6,7 @@
 /*   By: yel-hajj <yel-hajj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:21:51 by yel-hajj          #+#    #+#             */
-/*   Updated: 2023/01/06 15:51:30 by yel-hajj         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:38:35 by yel-hajj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	move_left(t_allvar *allvar)
 	if (allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != '0'
 		&& allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx - 1] != 'P')
 	{
-		allvar->i = 1000;
+		allvar->i = 0;
 		allvar->move_l = 0;
 		return (0);
 	}
@@ -51,21 +51,16 @@ int	move_enemy(t_allvar *allvar)
 {
 	if (allvar->bonus == 0)
 		return (0);
-	if (allvar->i == 5000)
+	if (allvar->i == 1000)
 	{
 		if (allvar->move_l == 0
 			&& (allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == '0'
 			|| allvar->tab[allvar->pos_enemyy][allvar->pos_enemyx + 1] == 'P'))
 		{
 			move_right(allvar);
-			mlx_destroy_image(allvar->mlx, allvar->mlx_image_enemy);
-			mlx_destroy_image(allvar->mlx, allvar->mlx_image_enemyy);
 		}	
-		else
-		{
-			if (!move_left(allvar))
-				return (0);
-		}
+		else if (!move_left(allvar))
+			return (0);
 		allvar->i = 0;
 	}
 	allvar->i++;
